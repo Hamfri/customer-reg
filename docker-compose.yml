@@ -1,0 +1,54 @@
+##########################################################
+#  Created by Humphrey                                   #
+##########################################################
+version: '3.1'
+services:
+  php:
+    build: docker/php
+    restart: always
+    container_name: wunder-api-server
+    working_dir: /application
+    volumes:
+      - ./server:/application
+    networks:
+      - wunder
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    command: --default-authentication_plugin=mysql_native_password
+    entrypoint:
+      [
+        '/entrypoint.sh',
+        '--character-set-server=utf8',
+        '--collation-server=utf8_general_ci',
+      ]
+    container_name: wunder-mysql-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=3440a1a21865fc3db12a
+      - MYSQL_DATABASE=wunder_db
+      - MYSQL_USER=wunder
+      - MYSQL_PASSWORD=e7d525b132cd1b25fac0
+    volumes:
+      - ./mysql_volume:/var/lib/mysql
+    ports:
+      - 4406:3306
+    networks:
+      - wunder
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    container_name: wunder-webserver
+    working_dir: /application
+    volumes:
+      - ./server:/application
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 9090:80
+    networks:
+      - wunder
+
+networks:
+  wunder:
+    driver: bridge
