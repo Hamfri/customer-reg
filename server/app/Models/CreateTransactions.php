@@ -24,4 +24,5 @@ class CreateTransactions extends Model
         'customer_id',
         'payment_data_id',
         'customer_id'
+    ];
 }
