@@ -18,10 +18,10 @@ class CreateCustomersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('telephone')->unique();
-            $table->timestamp('street');
+            $table->string('street');
+            $table->string('house_number');
             $table->integer('zip_code');
             $table->string('city');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
