@@ -1,0 +1,170 @@
+<div class="accounts-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <div class="card">
+                    <nav>
+                        <div class="nav nav-tabs p-0" id="tabs" #tabs>
+                            <button class="nav-link active" [ngClass]="{ 'active':activeTab==='personalInformation'}"
+                                (click)="activateTab('personalInformation')" data-bs-target="#personalInformation"
+                                data-bs-toggle="tab">Personal
+                                Information</button>
+
+                            <button class="nav-link" [ngClass]="{ 'active':activeTab==='addressInformation'}"
+                                (click)="activateTab('addressInformation')" data-bs-target="#addressInformation"
+                                data-bs-toggle="tab">Address
+                                Information</button>
+
+                            <button class="nav-link" [ngClass]="{ 'active':activeTab==='paymentInformation'}"
+                                (click)="activateTab('paymentInformation')" data-bs-target="#result"
+                                data-bs-toggle="tab">Payment
+                                Information</button>
+                        </div>
+                    </nav>
+                    <div class="card-body">
+                        <h4 class="card-title">Customer Registration Form</h4>
+                        <!-- tabs -->
+                        <div class="tab-content">
+                            <!-- Personal Information -->
+                            <div class="tab-pane" id="personalInformation"
+                                [ngClass]="{ 'active':activeTab==='personalInformation'}">
+                                <form [formGroup]="personalForm">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="First Name"
+                                            formControlName="firstName"
+                                            [ngClass]="{'is-invalid': personalFormSubmitted && personalInfo.firstName.errors }">
+                                        <label for="firstName">First Name</label>
+                                        <div *ngIf="personalFormSubmitted && personalInfo.firstName.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="personalInfo.firstName.errors.required">Firstname is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="Last Name"
+                                            formControlName="lastName"
+                                            [ngClass]="{'is-invalid': personalFormSubmitted && personalInfo.lastName.errors }">
+                                        <label for="lastName">Last Name</label>
+                                        <div *ngIf="personalFormSubmitted && personalInfo.lastName.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="personalInfo.lastName.errors.required">Lastname is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="Telephone"
+                                            formControlName="telephone"
+                                            [ngClass]="{'is-invalid': personalFormSubmitted && personalInfo.telephone.errors }">
+                                        <label for="">Telephone</label>
+                                        <div *ngIf="personalFormSubmitted && personalInfo.telephone.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="personalInfo.telephone.errors.required">Telephone is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary text-white float-end"
+                                        (click)="personalFormTab()">Next <span
+                                            class="bi bi-arrow-right"></span></button>
+                                </form>
+                            </div>
+                            <!-- ./Personal Information -->
+
+                            <!-- Address Information-->
+                            <div class="tab-pane" id="addressInformation"
+                                [ngClass]="{ 'active':activeTab==='addressInformation'}">
+                                <form [formGroup]="addressForm">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="Street"
+                                            formControlName="street"
+                                            [ngClass]="{'is-invalid': addressFormSubmitted && addressInfo.street.errors }">
+                                        <label for="street">Street</label>
+                                        <div *ngIf="addressFormSubmitted && addressInfo.street.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="addressInfo.street.errors.required">Street is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="House number"
+                                            formControlName="houseNumber"
+                                            [ngClass]="{'is-invalid': addressFormSubmitted && addressInfo.houseNumber.errors }">
+                                        <label for="houseNumber">House number</label>
+                                        <div *ngIf="addressFormSubmitted && addressInfo.houseNumber.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="addressInfo.houseNumber.errors.required">House number is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="Zip code"
+                                            formControlName="zipCode"
+                                            [ngClass]="{'is-invalid': addressFormSubmitted && addressInfo.zipCode.errors }">
+                                        <label for="zipCode">Zip code</label>
+                                        <div *ngIf="addressFormSubmitted && addressInfo.zipCode.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="addressInfo.zipCode.errors.required">Zipcode is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="City"
+                                            formControlName="city"
+                                            [ngClass]="{'is-invalid': addressFormSubmitted && addressInfo.city.errors }">
+                                        <label for="city">City</label>
+                                        <div *ngIf="addressFormSubmitted && addressInfo.city.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="addressInfo.city.errors.required">City is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary text-white float-end"
+                                        (click)="addressFormTab()">Next <span class="bi bi-arrow-right"></span></button>
+                                </form>
+
+                            </div>
+                            <!-- ./Address Information -->
+
+                            <!-- Payment Information-->
+                            <div class="tab-pane" id="paymentInformation"
+                                [ngClass]="{ 'active':activeTab==='paymentInformation'}">
+                                <form [formGroup]="paymentForm">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="Account owner"
+                                            formControlName="accountOwner" (keyup)="paymentFormTab()"
+                                            [ngClass]="{'is-invalid': submitted && paymentInfo.accountOwner.errors }">
+                                        <label for="accountOwner">Account owner</label>
+                                        <div *ngIf="submitted && paymentInfo.accountOwner.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="paymentInfo.accountOwner.errors.required">Account owner is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="IBAN"
+                                            formControlName="iban" (keyup)="paymentFormTab()"
+                                            [ngClass]="{'is-invalid': submitted && paymentInfo.iban.errors }">
+                                        <label for="ibans">IBAN</label>
+                                        <div *ngIf="submitted && paymentInfo.iban.errors" class="invalid-feedback">
+                                            <div *ngIf="paymentInfo.iban.errors.required">IBAN is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary text-white float-end"
+                                        (click)="onSubmit()">Submit</button>
+                                </form>
+
+                            </div>
+                            <!-- ./Payment Information-->
+                        </div>
+                        <!-- ./tabs -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
