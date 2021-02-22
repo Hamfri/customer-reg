@@ -74,8 +74,3 @@ Note, I have already generated the assets for the frontend and so this step migh
 # All set?
 
 Yaay! Visit app on http://localhost:9090
-
-# Developer contacts
-
-- Email: Humphrey Ndirangu
-- Email: humphrey.ndirangu@outlook.com
