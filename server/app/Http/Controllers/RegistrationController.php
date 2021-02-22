@@ -8,6 +8,35 @@ use GuzzleHttp\{Client, TransferStats};
 
 class RegistrationController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     summary="Register customer",
+     *     description="Register's a new customer",
+     *     tags={"Register Customer"},
+     *     @OA\RequestBody(
+     *         required = true,
+     *         description="test",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="bank_account",
+     *                 type="object",
+     *                 example = {"account_owner": "John Doe", "iban": "DE75512108001245126188"}
+     *             ),
+     *             @OA\Property(
+     *                 property="customer",
+     *                 type="object",
+     *                 example={"first_name": "John","last_name": "Doe","telephone": "017255860000","street": "Clara Zetkin Str 107","house_number": "WE09","zip_code": "99099","city": "Erfurt"}
+     *             )
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         description="Register user",
+     *         response=201, 
+     *     )
+     * )
+     */   
     public function registerUser(Request $request)
     {
         $customer = Customer::create([
@@ -29,6 +58,9 @@ class RegistrationController extends Controller
         return $transaction;
     }
 
+    /**
+     * send customer id to remote api
+     */
     public function sendPayment($bank_account)
     {
         $payment_data = [

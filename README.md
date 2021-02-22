@@ -17,7 +17,6 @@
 ### Backend
 
 - Add column validations for the api.
-- Add swagger to document the api.
 - Add Database transactions.
 - Implement functions to alert user when they try to register again when we already have their details such as telephone and iban which are stored as unique fields in the database.
 - implement phpunit tests.
@@ -27,6 +26,8 @@
 - Document all functions.
 - Add url payment url to .env
 - Refactor code where necessary.
+- create api resources.
+- add response codes for success and error
 
 ### Frontend
 
@@ -58,6 +59,17 @@
 - `chmod 777 *` (for testing purpose only)
 - `exit` (the docker container)
 - `cp .env.example .env`
+
+### Generate swagger api documentation
+
+- run command `php artisan l5-swagger:generate` and visit link http://localhost:9090/api/documentation
+
+### Optional step (Frontend compilation).
+
+Note, I have already generated the assets for the frontend and so this step might not be necessary.
+
+- `cd` into `wunder/client`
+- Run command `npm run build`
 
 # All set?
 
