@@ -69,6 +69,7 @@
 Note, I have already generated the assets for the frontend and so this step might not be necessary.
 
 - `cd` into `wunder/client`
+- npm i
 - Run command `npm run build`
 
 # All set?
