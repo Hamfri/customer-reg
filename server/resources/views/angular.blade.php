@@ -11,6 +11,6 @@
 
 <body>
   <app-root></app-root>
-<script src="/assets/angular/runtime.96254822893afa4fd974.js" defer></script><script src="/assets/angular/polyfills.8c151b8375e767ff858f.js" defer></script><script src="/assets/angular/scripts.cca327114593ed4ead26.js" defer></script><script src="/assets/angular/main.fc5dd76aaa730e8e6047.js" defer></script></body>
+<script src="/assets/angular/runtime.96254822893afa4fd974.js" defer></script><script src="/assets/angular/polyfills.8c151b8375e767ff858f.js" defer></script><script src="/assets/angular/scripts.cca327114593ed4ead26.js" defer></script><script src="/assets/angular/main.be31005720d28f50e40d.js" defer></script></body>
 
 </html>
