@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator;
 use App\Models\{Customer, Transaction, BankAccount};
 use GuzzleHttp\{Client, TransferStats};
 
@@ -38,23 +40,51 @@ class RegistrationController extends Controller
      * )
      */   
     public function registerUser(Request $request)
-    {
-        $customer = Customer::create([
-            'first_name'  => $request->customer['first_name'],
-            'last_name'  => $request->customer['last_name'],
-            'telephone'  => $request->customer['telephone'],
-            'street'  => $request->customer['street'],
-            'house_number'  => $request->customer['house_number'],
-            'zip_code'  => $request->customer['zip_code'],
-            'city' => $request->customer['city']
+    {   
+        // validate customer data
+        $customer_validator = Validator::make($request->customer, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'telephone' => 'required',
+            'street' => 'required',
+            'house_number' => 'required',
+            'zip_code' => 'required',
+            'city' => 'required',
         ]);
 
-        $bank_account = BankAccount::create([
-            'customer_id' => $customer->id,
-            'account_owner' => $request->bank_account['account_owner'],
-            'iban' => $request->bank_account['iban']
+        // validate bank data
+        $bank_account_validator = Validator::make($request->bank_account,[
+            'account_owner' => 'required',
+            'iban' => 'required'
         ]);
-        $transaction = $this->sendPayment($bank_account);
+
+        // validation error response
+        if($customer_validator->fails()){
+            $validator = $customer_validator->errors(); 
+            return response()->json($validator, 422);
+        }
+        if($bank_account_validator->fails()){
+            $validator = $bank_account_validator->errors(); 
+            return response()->json($validator, 422);
+        }
+        DB::transaction(function() use ($request, &$transaction){
+            $customer = Customer::create([
+                'first_name'  => $request->customer['first_name'],
+                'last_name'  => $request->customer['last_name'],
+                'telephone'  => $request->customer['telephone'],
+                'street'  => $request->customer['street'],
+                'house_number'  => $request->customer['house_number'],
+                'zip_code'  => $request->customer['zip_code'],
+                'city' => $request->customer['city']
+            ]);
+
+            $bank_account = BankAccount::create([
+                'customer_id' => $customer->id,
+                'account_owner' => $request->bank_account['account_owner'],
+                'iban' => $request->bank_account['iban']
+            ]);
+            $transaction = $this->sendPayment($bank_account);
+        });
         return $transaction;
     }
 
