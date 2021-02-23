@@ -235,7 +235,7 @@ export class RegistrationComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.log(error);
-        //this.error = error;
+        this.error = error;
       }
     );
   }
