@@ -16,38 +16,57 @@
 
 ### Backend
 
-- Add column validations for the api.
-- Add Database transactions.
-- Implement functions to alert user when they try to register again when we already have their details such as telephone and iban which are stored as unique fields in the database.
-- implement phpunit tests.
 - And sql indexes for faster querying of the database.
 - Add redis for caching requests.
-- implement proper authentication.
-- Document all functions.
-- Add url payment url to .env
-- Refactor code where necessary.
-- create api resources.
-- add response codes for success and error
 
 ### Frontend
 
 - Implement state management using ngrx/redux.
-- Improve the ui,styling and navigation.
+- Make use of IndexDB for state rehydration on page reloads.
 - Implement search engine optimizations.
-- Implement toaster.
+
+# What could have been done better
+
+## Backend
+
+- Add column validations for the api.
+- Add Database transactions to ensure we don't insert data into the database if any of the database transactions fails.
+- Implement functionality to alert a user when they try to register again when we already have their details such as telephone and iban which are stored as unique fields in the database.
+- Implement phpunit tests.
+- Implement proper authentication (login,registration,forgot-password and password-resets)
+- Add url payment url to .env
+- Refactor code where necessary.
+- create api resources.
+- Add http response codes for success and error
+
+## Frontend
+
+- Improve the ui,styling and navigation.
+- Implement toaster notifications.
 - Add validations for IBAN and telephone number.
-- Add tab validation warnings.
+- Add tab navigation validation warnings.
 - Document all functions.
-- implement unit tests.
+- Implement unit tests.
 - Add api url to environment.ts.
 - Write app packaging scripts to bundle the backend and frontend together
 - Refactor code where necessary.
+
+# Design patterns used
+
+I choose to create the front-end based on angular which is an SPA framework that implements the MVVM design pattern.
+
+## Advantages of model view view model (MVVM).
+
+1. It's highly reactive and hence provides instant feedback to users.
+2. It solves the problem of tightly coupled back-ends by ensuring that the front-end and the back-end are decoupled.
+3. Saves network bandwidth by avoiding the back and forth page reloads observed in the MVC or MVP patterns.
+4. Can be easily ported to a Desktop or mobile application.
 
 # How to run the application
 
 ### Prerequisites
 
-- install `docker` and `docker compose`.
+- Install `docker` and `docker compose`.
 - clone this application.
 - cd into the directory `wunder`.
 - run command `docker-compose build`
@@ -57,8 +76,8 @@
 - `composer install`
 - `php artisan migrate`
 - `chmod 777 *` (for testing purpose only)
-- `exit` (the docker container)
 - `cp .env.example .env`
+- `exit` (the docker container)
 
 ### Generate swagger api documentation
 
