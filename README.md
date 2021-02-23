@@ -70,18 +70,23 @@ I choose to create the front-end based on angular which is an SPA framework that
 - clone this application.
 - cd into the directory `wunder`.
 - run command `docker-compose build`
+- run `docker-compose up -d`
 
 ### After running the command `docker-compose exec php bash` run the following commands.
 
+- run `docker-compose exec php bash`
 - `composer install`
-- `php artisan migrate`
-- `chmod 777 *` (for testing purpose only)
 - `cp .env.example .env`
+- `php artisan migrate`
+- `chmod 777 -R *` (for testing purpose only)
 - `exit` (the docker container)
 
 ### Generate swagger api documentation
 
+- `docker-compose exec php bash`
 - run command `php artisan l5-swagger:generate` and visit link http://localhost:9090/api/documentation
+- `chmod 777 -R *` (for testing purpose only)
+- exit
 
 ### Optional step (Frontend compilation).
 
