@@ -67,6 +67,17 @@ class RegistrationController extends Controller
             $validator = $bank_account_validator->errors(); 
             return response()->json($validator, 422);
         }
+
+        // check if telephone exists
+        if($this->checkCustomer($telephone = $request->customer['telephone'])){
+            return response()->json("Customer with telephone: $telephone exists!",422);
+        }
+
+        // check if iban exists
+        if($this->checkIban($iban = $request->bank_account['iban'])){
+            return response()->json("Customer with IBAN: $iban exists!",422);
+        }
+
         DB::transaction(function() use ($request, &$transaction){
             $customer = Customer::create([
                 'first_name'  => $request->customer['first_name'],
@@ -86,6 +97,22 @@ class RegistrationController extends Controller
             $transaction = $this->sendPayment($bank_account);
         });
         return $transaction;
+    }
+
+    /**
+     * check if a customer with telephone number exists
+     */
+    public function checkCustomer($telephone){
+        $customer = Customer::where('telephone', $telephone)->exists();
+        return $customer ? true : false;
+    }
+
+    /**
+     * check if customer with iban exists.
+     */
+    public function checkIban($iban){
+        $bank_account = BankAccount::where('iban', $iban)->exists();
+        return $bank_account ? true : false;
     }
 
     /**
